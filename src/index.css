@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.menu-opened {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fondo oscuro con transparencia */
+  overflow: hidden;
+  /* Para evitar el desplazamiento cuando el menú está abierto */
+}
+
+.custom-scrollbar {
+  max-width: 250px;
+  overflow-x: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  /* Ancho de la barra de desplazamiento */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #5f6368;
+  /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 5px;
+  /* Borde redondeado del pulgar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f1f3f4;
+  /* Color del riel de la barra de desplazamiento */
+}
+
+/* Estilos adicionales para la barra de desplazamiento en otros navegadores */
+.custom-scrollbar::-webkit-scrollbar-thumb:vertical {
+  min-height: 30px;
+  /* Altura mínima del pulgar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #000;
+  /* Cambio de color al pasar el cursor sobre el pulgar */
+}
+
+
