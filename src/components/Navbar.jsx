@@ -4,14 +4,14 @@ function Navbar() {
   return (
 
     <>
-      <nav className='w-full hidden lg:flex top-0 h-16 bg-gray-200 z-[-1] rounded-lg justify-between items-center pr-3'>
+      <nav className='w-full mt-2 md:mt-0 flex top-0 h-16 bg-gray-200 z-[-1] rounded-lg justify-between items-center pr-3'>
         {/* Logo */}
         <div className='ml-3 text-xl font-bold text-gray-800'>
           YourLogo
         </div>
 
         {/* Menu Items */}
-        <div className='flex items-center space-x-4'>
+        <div className='hidden md:flex items-center space-x-4'>
           <a href="#" className='text-gray-700 hover:text-gray-900'>
             Home
           </a>

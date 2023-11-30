@@ -2,9 +2,9 @@ import React from 'react'
 
 function Login() {
   return (
-    <div className='w-[100%] h-screen grid place-items-center'>
+    <div className='w-[100%] h-screen grid place-items-center bg-gray-200'>
       <div>
-       <div className="max-w-md m-auto  w-96">
+       <div className="m-auto bg-white w-[350px]  lg:w-96">
         <div
           className="border-t-4 border-blue-600 overflow-hidden rounded shadow-lg"
         >

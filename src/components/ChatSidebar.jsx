@@ -44,9 +44,9 @@ const ChatSidebar = () => {
 
     return (
         <>
-            <div className="w-full lg:w-[450px] xl:w-[500px] 2xl:w-[650px] h-[80vh] bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
-                <div className='flex justify-between gap-4 items-center w-full'>
-                    <div className='w-[45px] hidden lg:flex'>
+            <div className="w-full lg:w-[450px] xl:w-[500px] 2xl:w-[650px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+                <div className='flex justify-start 2xl:justify-center gap-[5px] items-center w-full'>
+                    <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
                     </div>
                     <div>
@@ -59,12 +59,11 @@ const ChatSidebar = () => {
 
                 <div>
 
-                    <div className="relative flex my-2 w-full">
-                        <input type="search" className="bg-purple-white shadow rounded w-[100%] border-0 p-2 pl-8 outline-none lg:w-[350px] 2xl:w-[500px]" placeholder="Buscar Chat..." />
-                        <div className="absolute pin-r left-2 pin-t mt-3 mr-4 text-purple-lighter">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </div>
+                    <div className="flex my-2 w-full relative bg-white h-9 justify-start overflow-hidden">
+                        <input className='w-full absolute h-[100%] pl-2 outline-none' type="search" name="" id="" placeholder="Buscar..." />
+                        <p className='opacity-0 -z-10'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, laborum voluptate molestias unde corrupti error at aspernatur laudantium optio quasi delectus quo nihil ea aperiam quos dolore adipisci, voluptatem quisquam. Libero perspiciatis quidem, illo laborum iusto impedit velit voluptates enim voluptatibus molestiae facere esse doloremque deleniti maiores eligendi eveniet laudantium ipsam, omnis exercitationem corrupti, nesciunt aliquam! Nam consequuntur officia perferendis sed, distinctio tempore repellendus maxime cumque consequatur. Animi ex, neque perspiciatis, aliquam eos corporis dolor vero error explicabo ipsum, molestias itaque eius ea fuga sit tempora! Ex earum nobis quasi veritatis autem, alias cumque ullam porro? Minus quis fugiat harum!</p>
                     </div>
+
 
                 </div>
 
@@ -80,7 +79,7 @@ const ChatSidebar = () => {
 
 
 
-                <div className='w-full h-[75%] overflow-auto z-1 mt-3 bg-white rounded-lg'>
+                <div className='w-full h-[75%] overflow-auto z-1 mt-3 bg-white rounded-xl'>
                     {data.map((item, index) => (
                         <div key={index} className='flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 rounded-t'>
                             <div className='w-[50px]'>
@@ -89,7 +88,7 @@ const ChatSidebar = () => {
 
                             <div className='w-full h-12 overflow-hidden relative pt-6'>
                                 <span className='absolute top-1 tex-xs font-semibold h-6 overflow-hidden text-gray-800'>
-                                {item.name ? item.name : 'Usuario'}
+                                    {item.name ? item.name : 'Usuario'}
                                 </span>
                                 <span className='text-[#5f6368] text-[13.5px]'>
                                     {item.men}
@@ -101,10 +100,10 @@ const ChatSidebar = () => {
                                     <i class="fa-solid fa-gear text-xs"></i>
                                 </div>
                                 <div className="bg-green-500 hover:bg-green-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                <i class="fa-solid fa-bell text-xs"></i>
+                                    <i class="fa-solid fa-bell text-xs"></i>
                                 </div>
                                 <div className="bg-blue-500 hover:bg-blue-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                <i class="fa-solid fa-paper-plane text-xs"></i>
+                                    <i class="fa-solid fa-paper-plane text-xs"></i>
                                 </div>
                             </div>
                             <span className='absolute right-2 bottom-0 text-[12px]'>

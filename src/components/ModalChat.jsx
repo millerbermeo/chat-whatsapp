@@ -53,7 +53,7 @@ function ModalChat() {
     return (
         <>
             <div>
-                <button onClick={toggleModal} className="w-28 xl:w-32 text-white gap-2 bg-[#53bdeb] hover:bg-[#53bdeb]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm py-2.5 2xl:py-3 text-center flex justify-center items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 mr-2 mb-2">
+                <button onClick={toggleModal} className="w-[120px] xl:w-32 text-white gap-2 bg-[#53bdeb] hover:bg-[#53bdeb]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm py-2.5 2xl:py-3 text-center flex justify-center items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40">
                     Nuevo Chat
                     <i className="fa-solid fa-book"></i>
                 </button>
@@ -61,7 +61,7 @@ function ModalChat() {
 
             </div>
             {isOpen && (
-                <div className="fixed inset-0 flex items-center justify-center z-999 w-full z-20">
+                <div className="fixed inset-0 flex items-center justify-center z-999 w-full z-20 p-4 lg:p-0">
                     <div className="absolute inset-0 bg-black opacity-50" onClick={toggleModal}></div>
 
                     <div className="bg-white w-96 p-4 rounded shadow-lg z-50">
