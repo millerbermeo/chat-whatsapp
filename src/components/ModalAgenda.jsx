@@ -49,7 +49,7 @@ function ModalAgenda() {
     return (
         <>
             <div>
-                <button onClick={toggleModal} className="w-[120px] xl:w-32 text-white gap-5 bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm  py-2.5 2xl:py-3 text-center flex justify-center items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40">
+                <button onClick={toggleModal} className="w-full text-white gap-5 bg-[#005187] hover:bg-[#005187]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm  py-2.5 2xl:py-3 text-center flex justify-center items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40">
                     Agenda
                     <i className="fa-solid fa-comment-medical"></i>
                 </button>

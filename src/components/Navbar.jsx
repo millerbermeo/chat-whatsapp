@@ -1,14 +1,17 @@
 import React from 'react'
+import Dropdown from "./Dropdown"
 
 function Navbar() {
   return (
 
     <>
-      <nav className='w-full mt-2 md:mt-0 flex top-0 h-16 bg-gray-200 z-[-1] rounded-lg justify-between items-center pr-3'>
+      <nav className='w-full relative mt-2 md:mt-0 flex top-0 h-16 bg-gray-200 z-20 rounded-lg justify-between items-center pr-3'>
         {/* Logo */}
         <div className='ml-3 text-xl font-bold text-gray-800'>
           YourLogo
         </div>
+
+      
 
         {/* Menu Items */}
         <div className='hidden md:flex items-center space-x-4'>
@@ -27,9 +30,9 @@ function Navbar() {
         </div>
 
         {/* User Icon */}
-        <div className='w-[35px] h-[35px] bg-slate-800 rounded-full text-white text-xl flex justify-center items-center'>
-          <i className="fa-solid fa-user"></i>
-        </div>
+        <div>
+      <Dropdown/>
+      </div>
 
       </nav>
     </>

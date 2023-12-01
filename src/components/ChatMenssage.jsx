@@ -8,80 +8,80 @@ function ChatMenssage() {
     return (
         <>
             <div className='hidden z-10 lg:block w-full h-[80vh] shadow-lg relative'>
-                <div class="w-full h-[100%] p-5 bg-white rounded-lg overflow-y-scroll shadow-lg">
+                <div className="w-full h-[100%] overflow-y-scroll  bg-[#fff] py-5 px-12">
 
-                    <ul class="divide-y divide-gray-300 pb-14">
-                        <li class="flex items-end justify-end py-2 gap-2">
-                            <div class="text-blue-600 font-bold bg-blue-100 rounded-lg p-2 text-right">
+                    <ul className="pb-14">
+                        <li className="flex items-end justify-end py-2 gap-2">
+                            <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right">
                                 Hola, ¿cómo estás?
                             </div>
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2" />
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
                         </li>
-                        <li class="flex items-end justify-start py-2">
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2" />
-                            <div class="text-gray-800 bg-gray-100 rounded-lg p-2">
+                        <li className="flex items-end justify-start py-2">
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                            <div className="text-gray-800 bg-gray-100 rounded-lg p-2">
                                 ¡Hola! Estoy bien, ¿y tú?
                             </div>
                         </li>
-                        <li class="flex items-end justify-end py-2 gap-2">
-                                <div class="text-blue-600 font-bold bg-blue-100 rounded-lg p-2 text-right" >
+                        <li className="flex items-end justify-end py-2 gap-2">
+                            <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right" >
                                 Todo bien, gracias por preguntar.
                             </div>
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2"/>
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
                         </li>
 
-                        <li class="flex items-end justify-start py-2">
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2" />
-                            <div class="text-gray-800 bg-gray-100 rounded-lg p-2">
+                        <li className="flex items-end justify-start py-2">
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                            <div className="text-gray-800 bg-gray-100 rounded-lg p-2">
                                 ¡Hola! Estoy bien, ¿y tú?
                             </div>
                         </li>
-                        <li class="flex items-end justify-end py-2 gap-2">
-                                <div class="text-blue-600 font-bold bg-blue-100 rounded-lg p-2 text-right" >
+                        <li className="flex items-end justify-end py-2 gap-2">
+                            <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right" >
                                 Todo bien, gracias por preguntar.
                             </div>
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2"/>
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
                         </li>
 
-                        <li class="flex items-end justify-start py-2">
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2" />
-                            <div class="text-gray-800 bg-gray-100 rounded-lg p-2">
+                        <li className="flex items-end justify-start py-2">
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                            <div className="text-gray-800 bg-gray-100 rounded-lg p-2">
                                 ¡Hola! Estoy bien, ¿y tú?
                             </div>
                         </li>
-                        <li class="flex items-end justify-end py-2 gap-2">
-                                <div class="text-blue-600 font-bold bg-blue-100 rounded-lg p-2 text-right" >
+                        <li className="flex items-end justify-end py-2 gap-2">
+                            <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right" >
                                 Todo bien, gracias por preguntar.
                             </div>
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2"/>
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
                         </li>
 
-                        <li class="flex items-end justify-start py-2">
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2" />
-                            <div class="text-gray-800 bg-gray-100 rounded-lg p-2">
+                        <li className="flex items-end justify-start py-2">
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                            <div className="text-gray-800 bg-gray-100 rounded-lg p-2">
                                 ¡Hola! Estoy bien, ¿y tú?
                             </div>
                         </li>
-                        <li class="flex items-end justify-end py-2 gap-2">
-                                <div class="text-blue-600 font-bold bg-blue-100 rounded-lg p-2 text-right" >
+                        <li className="flex items-end justify-end py-2 gap-2">
+                            <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right" >
                                 Todo bien, gracias por preguntar.
                             </div>
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2"/>
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
                         </li>
 
-                        <li class="flex items-end justify-start py-2">
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2" />
-                            <div class="text-gray-800 bg-gray-100 rounded-lg p-2">
+                        <li className="flex items-end justify-start py-2">
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                            <div className="text-gray-800 bg-gray-100 rounded-lg p-2">
                                 ¡Hola! Estoy bien, ¿y tú?
                             </div>
                         </li>
-                        <li class="flex items-end justify-end py-2 gap-2">
-                                <div class="text-blue-600 font-bold bg-blue-100 rounded-lg p-2 text-right" >
+                        <li className="flex items-end justify-end py-2 gap-2">
+                            <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right" >
                                 Todo bien, gracias por preguntar.
                             </div>
-                            <img src="user.webp" alt="" class="w-10 h-10 rounded-full mr-2"/>
+                            <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
                         </li>
-                        
+
                     </ul>
 
                 </div>

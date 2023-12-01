@@ -45,25 +45,31 @@ const ChatSidebar = () => {
     return (
         <>
             <div className="w-full lg:w-[450px] xl:w-[500px] 2xl:w-[650px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
-                <div className='flex justify-start 2xl:justify-center gap-[5px] items-center w-full'>
+                <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
                     </div>
-                    <div>
+                    <div className='w-[50%]'>
                         <ModalAgenda />
                     </div>
-                    <div>
+                    <div className='w-[50%]'>
                         <ModalChat />
                     </div>
                 </div>
 
-                <div>
+                <div className='bg-[#fff] h-8 my-2 w-full'>
 
-                    <div className="flex my-2 w-full relative bg-white h-9 justify-start overflow-hidden">
-                        <input className='w-full absolute h-[100%] pl-2 outline-none' type="search" name="" id="" placeholder="Buscar..." />
-                        <p className='opacity-0 -z-10'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus, laborum voluptate molestias unde corrupti error at aspernatur laudantium optio quasi delectus quo nihil ea aperiam quos dolore adipisci, voluptatem quisquam. Libero perspiciatis quidem, illo laborum iusto impedit velit voluptates enim voluptatibus molestiae facere esse doloremque deleniti maiores eligendi eveniet laudantium ipsam, omnis exercitationem corrupti, nesciunt aliquam! Nam consequuntur officia perferendis sed, distinctio tempore repellendus maxime cumque consequatur. Animi ex, neque perspiciatis, aliquam eos corporis dolor vero error explicabo ipsum, molestias itaque eius ea fuga sit tempora! Ex earum nobis quasi veritatis autem, alias cumque ullam porro? Minus quis fugiat harum!</p>
+                    <div className="relative mb-3" data-te-input-wrapper-init>
+                        <input
+                            type="search"
+                            className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                            id="exampleSearch2"
+                            placeholder="Type query" />
+                        <label
+                            htmlFor="exampleSearch2"
+                            className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.2rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                        >Search</label>
                     </div>
-
 
                 </div>
 
@@ -79,7 +85,7 @@ const ChatSidebar = () => {
 
 
 
-                <div className='w-full h-[75%] overflow-auto z-1 mt-3 bg-white rounded-xl'>
+                <div className='w-full h-[75%] overflow-auto custom-scrollbar2 z-1 mt-3 bg-white rounded-xl'>
                     {data.map((item, index) => (
                         <div key={index} className='flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 rounded-t'>
                             <div className='w-[50px]'>
@@ -97,13 +103,13 @@ const ChatSidebar = () => {
 
                             <div className='flex translate-y-[-14px] h-2 gap-1'>
                                 <div className="bg-gray-800 hover:bg-black text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                    <i class="fa-solid fa-gear text-xs"></i>
+                                    <i className="fa-solid fa-gear text-xs"></i>
                                 </div>
                                 <div className="bg-green-500 hover:bg-green-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                    <i class="fa-solid fa-bell text-xs"></i>
+                                    <i className="fa-solid fa-bell text-xs"></i>
                                 </div>
                                 <div className="bg-blue-500 hover:bg-blue-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                                    <i className="fa-solid fa-paper-plane text-xs"></i>
                                 </div>
                             </div>
                             <span className='absolute right-2 bottom-0 text-[12px]'>
