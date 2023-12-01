@@ -3,9 +3,20 @@ import React, { useEffect, useState } from 'react';
 import ModalChat from './ModalChat';
 import ModalAgenda from './ModalAgenda';
 
-const ChatSidebar = () => {
+const ChatSidebar = ({ onClicEnDiv }) => {
 
     const [data, setData] = useState([]);
+
+
+    const [numeroSeleccionado, setNumeroSeleccionado] = useState(null);
+
+    const handleClick = (numberw) => {
+        // Aquí puedes hacer lo que necesites con el número seleccionado
+        console.log('Número seleccionado:', numberw);
+        // Puedes guardar el número en el estado si es necesario
+        setNumeroSeleccionado(numberw);
+        // También puedes pasarlo a otro componente aquí o realizar otras acciones
+    };
 
     const formatFecha = (fechaCompleta) => {
         const fecha = new Date(fechaCompleta);
@@ -32,6 +43,7 @@ const ChatSidebar = () => {
                     ...item,
                     fecha: formatFecha(item.fecha),
                 }));
+                console.log(data)
                 setData(formattedData);
             } catch (error) {
                 console.error('Error al obtener datos de la API:', error);
@@ -44,7 +56,7 @@ const ChatSidebar = () => {
 
     return (
         <>
-            <div className="w-full lg:w-[450px] xl:w-[500px] 2xl:w-[650px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div className="w-full lg:w-[650px] xl:w-[600px] 2xl:w-[700px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
@@ -87,7 +99,14 @@ const ChatSidebar = () => {
 
                 <div className='w-full h-[75%] overflow-auto custom-scrollbar2 z-1 mt-3 bg-white rounded-xl'>
                     {data.map((item, index) => (
-                        <div key={index} className='flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 rounded-t'>
+                        <div
+                            key={index}
+                            className='flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 rounded-t'
+                            onClick={() => {
+                                handleClick(item.numberw);
+                                onClicEnDiv(item.numberw);
+                            }}
+                        >
                             <div className='w-[50px]'>
                                 <img src="user.webp" alt="" />
                             </div>

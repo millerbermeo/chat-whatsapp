@@ -49,7 +49,7 @@ const Sidebar = () => {
     <>
 
       <div className={`${isDown3 ? 'lg:mr-[240px]' : 'lg:mr-[50px]'} duration-700 ease-in-out`}>
-      <div className={`absolute right-0 top-0 md:hidden pr-3 ${isOpen ? 'z-0' : 'z-50'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
+      <div className={`absolute right-0 top-0 md:hidden pr-3 ${isOpen ? 'z-10' : 'z-50'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
 
         <div className={`h-screen ml-[50px] ${isDown4 ? 'w-full' : 'w-0'} right-0  z-10 ${isDown4 ? 'bg-[#0000009b]' : 'bg-transparent'} fixed duration-2000 lg:bg-transparent`}>
           <div

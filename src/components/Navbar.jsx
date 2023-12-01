@@ -5,7 +5,7 @@ function Navbar() {
   return (
 
     <>
-      <nav className='w-full relative mt-2 md:mt-0 flex top-0 h-16 bg-gray-200 z-20 rounded-lg justify-between items-center pr-3'>
+      <nav className='w-full relative mt-2 md:mt-0 flex top-0 h-16 bg-gray-200 lg:z-20 rounded-lg justify-between items-center pr-3'>
         {/* Logo */}
         <div className='ml-3 text-xl font-bold text-gray-800'>
           YourLogo
@@ -30,7 +30,7 @@ function Navbar() {
         </div>
 
         {/* User Icon */}
-        <div>
+        <div className='pr-12 md:pr-2 lg:pr-0'>
       <Dropdown/>
       </div>
 
