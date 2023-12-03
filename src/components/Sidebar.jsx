@@ -15,13 +15,12 @@ const Sidebar = () => {
 
 
   const toggleSidebar = () => {
-    if (!isOpen) {
-      // Si el menú lateral está abierto, cierra los menús secundarios
+
       setIsChatOpen(false);
       setIsChatOpen2(false);
       setIsDown(false);
       setIsDown2(false);
-    }
+    
     setIsOpen(!isOpen);
     setIsDown3(!isDown3)
     setIsDown4(!isDown4)
@@ -30,17 +29,16 @@ const Sidebar = () => {
   };
 
   const toggleChatMenu = () => {
-    if (!isOpen) {
       setIsChatOpen(!isChatOpen);
       setIsDown(!isDown);
-    }
+    
   };
 
   const toggleChatMenu2 = () => {
-    if (!isOpen) {
+
       setIsChatOpen2(!isChatOpen2);
       setIsDown2(!isDown2);
-    }
+    
   };
 
   // f1f3f4
@@ -49,11 +47,11 @@ const Sidebar = () => {
     <>
 
       <div className={`${isDown3 ? 'lg:mr-[240px]' : 'lg:mr-[50px]'} duration-700 ease-in-out`}>
-      <div className={`absolute right-0 top-0 md:hidden pr-3 ${isOpen ? 'z-10' : 'z-50'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
+      <div className={`absolute right-0 top-0 md:-top-2 lg:hidden pr-3 ${isOpen ? 'z-50' : 'z-10'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
 
-        <div className={`h-screen ml-[50px] ${isDown4 ? 'w-full' : 'w-0'} right-0  z-10 ${isDown4 ? 'bg-[#0000009b]' : 'bg-transparent'} fixed duration-2000 lg:bg-transparent`}>
+        <div className={`h-screen ml-[50px] ${isDown4 ? 'w-0' : 'w-full'} right-0  z-10 ${isDown4 ? 'bg-transparent' : 'bg-[#0000009b]'} fixed duration-2000 lg:bg-transparent`}>
           <div
-            className={`bg-[#f1f2f3] h-screen w-[250px] ${isOpen ? 'translate-x-[-100%]' : 'translate-x-[0]'
+            className={`bg-[#f1f2f3] h-screen w-[250px] ${isOpen ? 'translate-x-[0]' : 'translate-x-[-100%]'
               } flex justify-start overflow-hidden flex-col duration-700 ease-in-out fixed top-0 left-0 z-10 lg:translate-x-0 pt-3  ${isOpen ? 'lg:w-[62px]' : 'w-[250px]'
               }`}
           >
@@ -112,10 +110,12 @@ const Sidebar = () => {
                     <li className='flex items-center gap-2'><i className="fas fa-circle text-[6px]"></i> Opción 3</li>
                   </ul>
                 </div>
+                <a href="/">
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
                   <li>Perfil</li>
                 </div>
+                </a>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
                   <li>Contacto</li>

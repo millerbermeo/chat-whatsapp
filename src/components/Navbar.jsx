@@ -30,7 +30,7 @@ function Navbar() {
         </div>
 
         {/* User Icon */}
-        <div className='pr-12 md:pr-2 lg:pr-0'>
+        <div className='pr-12 lg:pr-0'>
       <Dropdown/>
       </div>
 

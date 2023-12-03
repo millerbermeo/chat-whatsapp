@@ -6,7 +6,7 @@ import ModalAgenda from './ModalAgenda';
 
 const ChatSidebar = ({ onClicEnDiv }) => {
 
-    const isSmallScreen = useMediaQuery({ minWidth: 500 });
+    const isSmallScreen = useMediaQuery({ minWidth: 769 });
 
   const [data, setData] = useState([]);
   const [divStyle, setDivStyle] = useState({});

@@ -3,6 +3,12 @@ import axios from 'axios';
 
 function ChatMenssage({ numeroSeleccionado }) {
   const [mensajes, setMensajes] = useState([]);
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+
+
+  const handleResetStyle = () => {
+    setResetStyle(true);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +36,18 @@ function ChatMenssage({ numeroSeleccionado }) {
 
   const renderMedia = (mensaje) => {
     if (mensaje.tipo_media === 'image') {
-      return <img src={mensaje.url} alt="Imagen" className="w-[200px] h-auto object-contain" />;
+
+      return (
+        <img
+          src={mensaje.url}
+          alt="Imagen"
+          className="w-[200px] h-auto object-contain cursor-pointer"
+          onClick={() => setFullscreenImage(mensaje.url)}
+        />
+      )
+
+
+
     } else if (mensaje.tipo_media === 'document') {
       return (
         <a target='_blank' href={mensaje.url} download>
@@ -45,10 +62,14 @@ function ChatMenssage({ numeroSeleccionado }) {
     }
   };
 
+  const handleReloadPage = () => {
+    window.location.reload();
+  };
+
   return (
     <>
-      <div className='z-1 md:z-10 w-full h-[78vh] md:h-[80vh] shadow-lg relative'>
-        <div className="w-full h-[100%] overflow-y-scroll custom-scrollbar3 bg-[#fff] py-5 px-4 md:px-12">
+      <div className='z-1 mlg:z-10 w-full h-[78vh] md:h-[80vh] shadow-lg relative'>
+        <div className="w-full h-[100%] overflow-y-scroll custom-scrollbar3 bg-[#fff] py-5 px-4 md:px-12" style={{ backgroundImage: "url('background2.png')", backgroundSize: "cover" }}>
           <ul className="pb-14">
             {mensajes.map((mensaje, index) => (
               <li
@@ -69,12 +90,23 @@ function ChatMenssage({ numeroSeleccionado }) {
                   </>
                 )}
               </li>
+
             ))}
+            {fullscreenImage && (
+              <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-90  z-50 flex items-center justify-center" onClick={() => setFullscreenImage(null)}>
+                <img
+                  src={fullscreenImage}
+                  alt="Imagen a pantalla completa"
+                  className="w-96 h-auto"
+
+                />
+              </div>
+            )}
           </ul>
         </div>
         <div className='w-full sticky h-14 bg-gray-200 bottom-0'>
           <div className="w-[90%] mx-auto p-2 gap-2 flex">
-          <button type='submit'>
+            <button onClick={handleReloadPage} className='md:hidden' type='submit'>
               <div className='w-[40px] h-[40px] bg-[#000] rounded-[25px] text-white flex justify-center items-center text-2xl'>
                 <i className="fa-solid fa-chevron-left"></i>
               </div>
@@ -93,6 +125,7 @@ function ChatMenssage({ numeroSeleccionado }) {
             </button>
           </div>
         </div>
+
       </div>
     </>
   );
