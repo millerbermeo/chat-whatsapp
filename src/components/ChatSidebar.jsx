@@ -1,11 +1,24 @@
 import axios from 'axios';
+import { useMediaQuery } from 'react-responsive';
 import React, { useEffect, useState } from 'react';
 import ModalChat from './ModalChat';
 import ModalAgenda from './ModalAgenda';
 
 const ChatSidebar = ({ onClicEnDiv }) => {
 
-    const [data, setData] = useState([]);
+    const isSmallScreen = useMediaQuery({ minWidth: 500 });
+
+  const [data, setData] = useState([]);
+  const [divStyle, setDivStyle] = useState({});
+
+  const handleDivClick = () => {
+    // Actualiza el estilo del div al hacer clic
+    setDivStyle({
+      display: isSmallScreen ? 'flex' : 'none',
+      // Otros estilos...
+    });
+
+}
 
 
     const [numeroSeleccionado, setNumeroSeleccionado] = useState(null);
@@ -56,7 +69,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     return (
         <>
-            <div className="w-full lg:w-[650px] xl:w-[600px] 2xl:w-[700px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div style={divStyle}  className="w-full lg:w-[650px] xl:w-[600px] 2xl:w-[700px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
@@ -97,7 +110,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
 
 
-                <div className='w-full h-[75%] overflow-auto custom-scrollbar2 lg:-z-10 mt-3 bg-white rounded-xl'>
+                <div onClick={handleDivClick} className='w-full h-[65%] md:h-[75%] overflow-auto custom-scrollbar2 lg:-z-10 mt-3 bg-white rounded-xl'>
                     {data.map((item, index) => (
                         <div
                             key={index}

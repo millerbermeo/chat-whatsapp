@@ -47,7 +47,7 @@ function ChatMenssage({ numeroSeleccionado }) {
 
   return (
     <>
-      <div className='z-10 w-full h-[80vh] shadow-lg relative'>
+      <div className='z-1 md:z-10 w-full h-[78vh] md:h-[80vh] shadow-lg relative'>
         <div className="w-full h-[100%] overflow-y-scroll custom-scrollbar3 bg-[#fff] py-5 px-4 md:px-12">
           <ul className="pb-14">
             {mensajes.map((mensaje, index) => (
@@ -74,6 +74,11 @@ function ChatMenssage({ numeroSeleccionado }) {
         </div>
         <div className='w-full sticky h-14 bg-gray-200 bottom-0'>
           <div className="w-[90%] mx-auto p-2 gap-2 flex">
+          <button type='submit'>
+              <div className='w-[40px] h-[40px] bg-[#000] rounded-[25px] text-white flex justify-center items-center text-2xl'>
+                <i className="fa-solid fa-chevron-left"></i>
+              </div>
+            </button>
             <div className="relative w-full text-gray-600">
               <input
                 className="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none focus:border-blue-500"
