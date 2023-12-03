@@ -30,11 +30,11 @@ function ChatMenssage({ numeroSeleccionado }) {
 
   const renderMedia = (mensaje) => {
     if (mensaje.tipo_media === 'image') {
-      return <img src={mensaje.url} alt="Imagen" className="w-full max-h-96 object-contain" />;
+      return <img src={mensaje.url} alt="Imagen" className="w-[200px] h-auto object-contain" />;
     } else if (mensaje.tipo_media === 'document') {
       return (
         <a target='_blank' href={mensaje.url} download>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded">
+          <button className="bg-[#005187] hover:bg-[#005187]/80 text-white font-bold px-4 py-2 rounded">
             {mensaje.men}
           </button>
         </a>
@@ -47,8 +47,8 @@ function ChatMenssage({ numeroSeleccionado }) {
 
   return (
     <>
-      <div className='hidden z-10 lg:block w-full h-[80vh] shadow-lg relative'>
-        <div className="w-full h-[100%] overflow-y-scroll custom-scrollbar3 bg-[#fff] py-5 px-12">
+      <div className='z-10 w-full h-[80vh] shadow-lg relative'>
+        <div className="w-full h-[100%] overflow-y-scroll custom-scrollbar3 bg-[#fff] py-5 px-4 md:px-12">
           <ul className="pb-14">
             {mensajes.map((mensaje, index) => (
               <li
@@ -60,11 +60,11 @@ function ChatMenssage({ numeroSeleccionado }) {
                     <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right">
                       {renderMedia(mensaje)}
                     </div>
-                    <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                    <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2 hidden md:block" />
                   </>
                 ) : (
                   <>
-                    <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2" />
+                    <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2 hidden md:block" />
                     <div className="text-gray-800 bg-gray-100 rounded-lg p-2">{renderMedia(mensaje)}</div>
                   </>
                 )}

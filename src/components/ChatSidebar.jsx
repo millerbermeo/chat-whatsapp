@@ -97,7 +97,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
 
 
-                <div className='w-full h-[75%] overflow-auto custom-scrollbar2 z-1 mt-3 bg-white rounded-xl'>
+                <div className='w-full h-[75%] overflow-auto custom-scrollbar2 lg:-z-10 mt-3 bg-white rounded-xl'>
                     {data.map((item, index) => (
                         <div
                             key={index}
