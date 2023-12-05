@@ -49,7 +49,7 @@ const Sidebar = () => {
       <div className={`${isDown3 ? 'lg:mr-[240px]' : 'lg:mr-[50px]'} duration-700 ease-in-out`}>
       <div className={`absolute right-0 top-0 md:-top-2 lg:hidden pr-3 ${isOpen ? 'z-50' : 'z-10'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
 
-        <div className={`h-screen ml-[50px] ${isDown4 ? 'w-0' : 'w-full'} right-0  z-10 ${isDown4 ? 'bg-transparent' : 'bg-[#0000009b]'} fixed duration-2000 lg:bg-transparent`}>
+        <div className={`h-screen ml-[50px] right-0  z-10 ${isDown4 ? 'bg-transparent' : 'bg-[#0000009b]'} fixed duration-2000 lg:bg-transparent`}>
           <div
             className={`bg-[#f1f2f3] h-screen w-[250px] ${isOpen ? 'translate-x-[0]' : 'translate-x-[-100%]'
               } flex justify-start overflow-hidden flex-col duration-700 ease-in-out fixed top-0 left-0 z-10 lg:translate-x-0 pt-3  ${isOpen ? 'lg:w-[62px]' : 'w-[250px]'

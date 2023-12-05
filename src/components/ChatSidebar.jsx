@@ -69,7 +69,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     return (
         <>
-            <div style={divStyle}  className="w-full lg:w-[650px] xl:w-[600px] 2xl:w-[700px] h-screen lg:h-[80vh] lg:z-20 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div style={divStyle}  className="w-full lg:w-[650px] xl:w-[600px] 2xl:w-[700px] h-screen lg:h-[80vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
