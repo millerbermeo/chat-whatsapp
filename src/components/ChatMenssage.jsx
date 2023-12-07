@@ -1,24 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef  } from 'react';
 import axios from 'axios';
 
 function ChatMenssage({ numeroSeleccionado }) {
   const [mensajes, setMensajes] = useState([]);
   const [fullscreenImage, setFullscreenImage] = useState(null);
   const [scrollRef, setScrollRef] = useState(null);
+  const mensajeInputRef = useRef(null);
+
+  const enviarMensaje = async () => {
+    try {
+      const formData2 = new FormData();
+      formData2.append('numberw', numeroSeleccionado);
+      formData2.append('message', mensajeInputRef.current.value);
+  
+      // Espera a que la operación asíncrona se complete
+      await axios.post(
+        'http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/api_send_message.php',
+        formData2
+      );
+  
+      mensajeInputRef.current.value = "";
+
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+    }
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!numeroSeleccionado) {
+          return;
+        }
         const formData = new FormData();
         formData.append('numberw', numeroSeleccionado);
-
+  
         const response = await axios.post(
           'http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/chats_principal.php',
           formData
         );
-
-        setMensajes(response.data);
-
+  
+        // Invertir el orden de los mensajes antes de establecerlos en el estado
+        setMensajes(response.data.reverse());
+  
         // Desplazar hacia abajo después de cargar los mensajes
         if (scrollRef && scrollRef.scrollTop === 0) {
           scrollRef.scrollTop = scrollRef.scrollHeight;
@@ -103,11 +128,11 @@ function ChatMenssage({ numeroSeleccionado }) {
                     <div className="text-[#fff] bg-[#84b6f4] rounded-lg p-2 text-right">
                       {renderMedia(mensaje)}
                     </div>
-                    <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2 hidden md:block" />
+                    <i className="fa-solid border border-b-2 fa-user-tie text-2xl w-10 h-10 grid place-items-center text-[#84b6f4] bg-gray-200 rounded-full"></i>
                   </>
                 ) : (
                   <>
-                    <img src="user.webp" alt="" className="w-10 h-10 rounded-full mr-2 hidden md:block" />
+                    <i className="fa-solid fa-user text-2xl w-10 h-10 grid place-items-center text-gray-400 bg-[#f1f2f3] rounded-full"></i>
                     <div className="text-gray-800 bg-gray-100 rounded-lg p-2">{renderMedia(mensaje)}</div>
                   </>
                 )}
@@ -118,7 +143,7 @@ function ChatMenssage({ numeroSeleccionado }) {
                 <img
                   src={fullscreenImage}
                   alt="Imagen a pantalla completa"
-                  className="w-96 h-auto"
+                  className="w-[40%] h-auto max-h-[90%]"
                 />
               </div>
             )}
@@ -133,12 +158,13 @@ function ChatMenssage({ numeroSeleccionado }) {
             </button>
             <div className="relative w-full text-gray-600">
               <input
+                ref={mensajeInputRef}
                 className="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none focus:border-blue-500"
                 type="text"
                 placeholder="Escribe algo..."
               />
             </div>
-            <button type='submit'>
+            <button type='submit' onClick={enviarMensaje}>
               <div className='w-[40px] h-[40px] bg-green-500 rounded-[25px] text-white flex justify-center items-center text-2xl'>
                 <i className="fa-solid fa-chevron-right"></i>
               </div>

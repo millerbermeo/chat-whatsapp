@@ -50,7 +50,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/chats_no_respondidos.php');
+                const response = await axios.get('http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/api_chats_agente.php');
                 // Mapea los datos y formatea la fecha
                 const formattedData = response.data.map(item => ({
                     ...item,

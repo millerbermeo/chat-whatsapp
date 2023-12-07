@@ -8,7 +8,7 @@ function Navbar() {
       <nav className='w-full lg:z-0 relative mt-2 md:mt-0 flex top-0 h-16 bg-gray-200 rounded-lg justify-between items-center pr-3'>
         {/* Logo */}
         <div className='ml-3 text-xl font-bold text-gray-800'>
-          YourLogo
+          <img className='w-52' src="negociemoss.png" alt="" />
         </div>
 
       

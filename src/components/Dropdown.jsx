@@ -11,7 +11,7 @@ function Dropdown() {
 
     return (
         <div>
-            <div className="relative">
+            <div className="">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
                 >
@@ -30,7 +30,7 @@ function Dropdown() {
                     leaveFrom="transform scale-100"
                     leaveTo="transform scale-0"
                 >
-                    <div className="origin-top-right z-50 absolute right-0 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+                    <div className="origin-top-right z-999 absolute right-0 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
                         <div className="py-1">
                             <a
                                 href="#"
