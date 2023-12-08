@@ -60,7 +60,7 @@ const Sidebar = () => {
                 {/* <img src="logo.png" alt="" onClick={toggleSidebar}/> */}
                 <i className="fa-solid fa-bars text-white text-xl"></i>
               </div>
-              <h1 className="text-[#000] text-2xl font-semibold">NEGOCIEMOS</h1>
+              <img className='w-40' src="negociemoss.png" alt="" />
             </div>
 
 

@@ -69,7 +69,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     return (
         <>
-            <div style={divStyle}  className="w-full lg:w-[650px] xl:w-[600px] 2xl:w-[700px] h-screen lg:h-[80vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div style={divStyle}  className="w-full lg:w-[700px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
@@ -82,7 +82,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                     </div>
                 </div>
 
-                <div className='bg-[#fff] h-8 my-2 w-full'>
+                <div className='bg-[#fff] h-8 rounded my-2 w-full'>
 
                     <div className="relative mb-3" data-te-input-wrapper-init>
                         <input
@@ -128,7 +128,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                                 <span className='absolute top-1 tex-xs font-semibold h-6 overflow-hidden text-gray-800'>
                                     {item.name ? item.name : 'Usuario'}
                                 </span>
-                                <span className='text-[#5f6368] text-[13.5px]'>
+                                <span className='text-[#5f6368] w-[60%] overflow-hidden text-[13.5px]'>
                                     {item.men}
                                 </span>
                             </div>

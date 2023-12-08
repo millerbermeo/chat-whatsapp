@@ -67,4 +67,15 @@
   /* Cambio de color al pasar el cursor sobre el pulgar */
 }
 
+/* Estilo para ocultar el input real */
+input[type="file"] {
+  display: none;
+}
+
+/* Estilo para la etiqueta que actúa como el botón */
+.file-input-label {
+  display: inline-block;
+}
+
+
 
