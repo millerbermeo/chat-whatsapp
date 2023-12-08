@@ -13,7 +13,13 @@ function ChatMenssage({ numeroSeleccionado }) {
   const lastMessageRef = useRef(null);
   const [shouldScrollToLast, setShouldScrollToLast] = useState(true);
 
-
+  const formatFecha = (fechaCompleta) => {
+    const fecha = new Date(fechaCompleta);
+    const hora = fecha.getHours().toString().padStart(2, '0');
+    const minutos = fecha.getMinutes().toString().padStart(2, '0');
+    return `${hora}:${minutos}`;
+  };
+  
 
   const handleEmojiClick = (emoji) => {
     // Agregar el emoji seleccionado al texto del input
@@ -84,6 +90,7 @@ function ChatMenssage({ numeroSeleccionado }) {
       formData2.append('numberw', numeroSeleccionado);
       formData2.append('message', mensajeInputRef.current.value);
       formData2.append('type_m', type_file);
+      mensajeInputRef.current.value = '';
 
       // Espera a que la operación asíncrona se complete
       await axios.post(
@@ -91,7 +98,7 @@ function ChatMenssage({ numeroSeleccionado }) {
         formData2
       );
 
-      mensajeInputRef.current.value = '';
+
       setShouldScrollToLast(true);
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
@@ -148,6 +155,15 @@ function ChatMenssage({ numeroSeleccionado }) {
   }, [numeroSeleccionado, scrollRef, mensajes]);
 
   const renderMedia = (mensaje) => {
+
+    const horaStyle = {
+      position: 'absolute',
+      bottom: '-4px',
+      fontSize: '11px',
+      color: "#fff",
+      fontWeight: "normal"
+    };
+    
     if (mensaje.tipo_media === 'image') {
       return (
         <div className="relative">
@@ -201,8 +217,12 @@ function ChatMenssage({ numeroSeleccionado }) {
         />
       );
     } else {
-      return <div>{mensaje.men}</div>;
-    }
+      
+      return (
+        <div className='relative'>
+          {mensaje.men} <span style={mensaje.b1 === '1' ? { ...horaStyle, right: '-32px' } : { ...horaStyle, left: '-32px' }}>{formatFecha(mensaje.fecha)}</span>
+        </div>
+      );    }
   };
 
   const handleReloadPage = () => {
@@ -214,8 +234,8 @@ function ChatMenssage({ numeroSeleccionado }) {
   return (
     <>
       <div className='w-full h-[87vh] md:h-[95vh] shadow-lg relative flex flex-col bg-gray-100'>
-        <div className="w-full mt-5 h-[100%] overflow-y-scroll custom-scrollbar3 px-4 md:px-12 bg-gray-100" ref={(ref) => setScrollRef(ref)}>
-          <div className='absolute bottom-16 left-[40px] flex items-center flex-col'>
+        <div className="w-full mt-5 pb-[15px] h-[100%] overflow-y-scroll custom-scrollbar3 px-4 md:px-12 bg-gray-100" ref={(ref) => setScrollRef(ref)}>
+          <div className='absolute bottom-16 left-[40px] flex items-center flex-col z-50'>
 
             {mostrarDiv ?
               <Picker data={data} onEmojiSelect={handleEmojiClick} /> : ''}
@@ -229,15 +249,15 @@ function ChatMenssage({ numeroSeleccionado }) {
               >
                 {mensaje.b1 === '2' ? (
                   <>
-                    <div className="text-[#fff] bg-[#84b6f4] max-w-[80%] rounded-lg p-2 text-right">
+                    <div className="text-black text-[15px] bg-[#84b6f4] max-w-[65%] rounded-lg p-[7px] pl-10 text-left">
                       {renderMedia(mensaje)}
                     </div>
                     <i className="fa-solid border border-[#84b6f4] fa-user-tie text-2xl w-10 h-10 grid place-items-center text-[#84b6f4] bg-gray-200 rounded-full"></i>
                   </>
                 ) : (
                   <>
-                    <i className="fa-solid  border border-gray-300 fa-user text-2xl w-10 h-10 grid place-items-center text-gray-400 bg-[#f1f2f3] rounded-full"></i>
-                    <div className="text-gray-800 bg-gray-300 rounded-lg p-2 font-semibold">{renderMedia(mensaje)}</div>
+                    <i className="fa-solid  border border-gray-300 fa-user text-2xl w-10 h-10 grid place-items-center text-gray-400 bg-gray-200 rounded-full"></i>
+                    <div className="text-black text-[15px] bg-gray-300 max-w-[65%]  rounded-lg p-[7px] pr-10">{renderMedia(mensaje)}</div>
                   </>
                 )}
               </li>

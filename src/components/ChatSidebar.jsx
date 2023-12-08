@@ -8,17 +8,17 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     const isSmallScreen = useMediaQuery({ minWidth: 769 });
 
-  const [data, setData] = useState([]);
-  const [divStyle, setDivStyle] = useState({});
+    const [data, setData] = useState([]);
+    const [divStyle, setDivStyle] = useState({});
 
-  const handleDivClick = () => {
-    // Actualiza el estilo del div al hacer clic
-    setDivStyle({
-      display: isSmallScreen ? 'flex' : 'none',
-      // Otros estilos...
-    });
+    const handleDivClick = () => {
+        // Actualiza el estilo del div al hacer clic
+        setDivStyle({
+            display: isSmallScreen ? 'flex' : 'none',
+            // Otros estilos...
+        });
 
-}
+    }
 
 
     const [numeroSeleccionado, setNumeroSeleccionado] = useState(null);
@@ -33,11 +33,25 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     const formatFecha = (fechaCompleta) => {
         const fecha = new Date(fechaCompleta);
-        return fecha.toLocaleTimeString('es-ES', {
-            hour: '2-digit',
-            minute: '2-digit',
-        });
-    };
+        const hora = fecha.getHours().toString().padStart(2, '0');
+        const minutos = fecha.getMinutes().toString().padStart(2, '0');
+        const ahora = new Date();
+      
+        const tiempoTranscurrido = ahora - fecha;
+      
+        if (tiempoTranscurrido < 24 * 60 * 60 * 1000) {
+          // Menos de 24 horas, mostrar hora
+          return `${hora}:${minutos}`;
+        } else if (tiempoTranscurrido < 48 * 60 * 60 * 1000) {
+          // Entre 24 y 48 horas, mostrar "Ayer"
+          return 'Ayer';
+        } else {
+          // Más de 48 horas, mostrar el nombre del día
+          const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+          const nombreDia = diasSemana[fecha.getDay()];
+          return nombreDia;
+        }
+      };
 
     const MostrarTodos = () => {
         alert("Filtrar Mostrar Todos")
@@ -63,13 +77,17 @@ const ChatSidebar = ({ onClicEnDiv }) => {
             }
         };
 
+        const intervalId = setInterval(fetchData, 1000);
+
+        return () => clearInterval(intervalId);
+
         fetchData();
 
     }, []);
 
     return (
         <>
-            <div style={divStyle}  className="w-full lg:w-[700px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div style={divStyle} className="w-full lg:w-[700px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
