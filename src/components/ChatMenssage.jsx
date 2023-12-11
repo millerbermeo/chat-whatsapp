@@ -19,7 +19,7 @@ function ChatMenssage({ numeroSeleccionado }) {
     const minutos = fecha.getMinutes().toString().padStart(2, '0');
     return `${hora}:${minutos}`;
   };
-  
+
 
   const handleEmojiClick = (emoji) => {
     // Agregar el emoji seleccionado al texto del input
@@ -163,7 +163,7 @@ function ChatMenssage({ numeroSeleccionado }) {
       color: "#fff",
       fontWeight: "normal"
     };
-    
+
     if (mensaje.tipo_media === 'image') {
       return (
         <div className="relative">
@@ -217,12 +217,13 @@ function ChatMenssage({ numeroSeleccionado }) {
         />
       );
     } else {
-      
+
       return (
-        <div className='relative'>
+        <div className='relative flex break-words'>
           {mensaje.men} <span style={mensaje.b1 === '1' ? { ...horaStyle, right: '-32px' } : { ...horaStyle, left: '-32px' }}>{formatFecha(mensaje.fecha)}</span>
         </div>
-      );    }
+      );
+    }
   };
 
   const handleReloadPage = () => {
@@ -249,7 +250,7 @@ function ChatMenssage({ numeroSeleccionado }) {
               >
                 {mensaje.b1 === '2' ? (
                   <>
-                    <div className="text-black text-[15px] bg-[#84b6f4] max-w-[65%] rounded-lg p-[7px] pl-10 text-left">
+                    <div className="text-black break-all text-[15px] bg-[#84b6f4] flex-wrap flex max-w-[65%] rounded-lg p-[7px] pl-10 text-left">
                       {renderMedia(mensaje)}
                     </div>
                     <i className="fa-solid border border-[#84b6f4] fa-user-tie text-2xl w-10 h-10 grid place-items-center text-[#84b6f4] bg-gray-200 rounded-full"></i>
@@ -257,7 +258,7 @@ function ChatMenssage({ numeroSeleccionado }) {
                 ) : (
                   <>
                     <i className="fa-solid  border border-gray-300 fa-user text-2xl w-10 h-10 grid place-items-center text-gray-400 bg-gray-200 rounded-full"></i>
-                    <div className="text-black text-[15px] bg-gray-300 max-w-[65%]  rounded-lg p-[7px] pr-10">{renderMedia(mensaje)}</div>
+                    <div className="text-black text-[15px] break-all bg-gray-300 flex-wrap flex max-w-[65%]  rounded-lg p-[7px] pr-10">{renderMedia(mensaje)}</div>
                   </>
                 )}
               </li>

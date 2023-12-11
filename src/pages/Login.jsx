@@ -29,7 +29,9 @@ function Login() {
           <div
             className="border-t-4 border-blue-600 overflow-hidden rounded shadow-lg"
           >
-            <h3 className="text-xl text-center mt-8 mb-8">Bienvenido a<br></br> <span className='font-bold text-3xl'>Negociemos</span></h3>
+            <h3 className="text-xl text-center mt-8 mb-2">Bienvenido a</h3>
+            <img className='w-56 mb-5 mx-auto' src="negociemoss.png" alt="" />
+            
             <div className="px-4 mb-4">
               <div className={`relative ${emailFocused || emailValue ? 'focus' : ''}`}>
                 <FontAwesomeIcon icon={faEnvelope} className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${emailFocused || emailValue ? 'text-blue-500' : 'text-gray-400'}`} />
@@ -78,10 +80,10 @@ function Login() {
                 </button>
               </div>
             </Link>
-            <div className="bg-gray-100 text-center text-gray-700 py-5">
+            {/* <div className="bg-gray-100 text-center text-gray-700 py-5">
               Crear Cuenta?
               <a href="#" className="font-semibold no-underline text-black"> Signup</a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

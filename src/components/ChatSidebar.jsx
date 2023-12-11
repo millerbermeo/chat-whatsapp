@@ -1,15 +1,18 @@
 import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ModalChat from './ModalChat';
 import ModalAgenda from './ModalAgenda';
 
 const ChatSidebar = ({ onClicEnDiv }) => {
 
     const isSmallScreen = useMediaQuery({ minWidth: 769 });
+    const newMessageSoundRef = useRef(new Audio('../../../public/sonido.mp3'));
+
 
     const [data, setData] = useState([]);
     const [divStyle, setDivStyle] = useState({});
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleDivClick = () => {
         // Actualiza el estilo del div al hacer clic
@@ -19,6 +22,16 @@ const ChatSidebar = ({ onClicEnDiv }) => {
         });
 
     }
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    const filteredData = data.filter((item) => {
+        // Filtra por nombre o cualquier otro criterio de búsqueda que desees
+        return item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.men.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
 
     const [numeroSeleccionado, setNumeroSeleccionado] = useState(null);
@@ -36,22 +49,22 @@ const ChatSidebar = ({ onClicEnDiv }) => {
         const hora = fecha.getHours().toString().padStart(2, '0');
         const minutos = fecha.getMinutes().toString().padStart(2, '0');
         const ahora = new Date();
-      
+
         const tiempoTranscurrido = ahora - fecha;
-      
+
         if (tiempoTranscurrido < 24 * 60 * 60 * 1000) {
-          // Menos de 24 horas, mostrar hora
-          return `${hora}:${minutos}`;
+            // Menos de 24 horas, mostrar hora
+            return `${hora}:${minutos}`;
         } else if (tiempoTranscurrido < 48 * 60 * 60 * 1000) {
-          // Entre 24 y 48 horas, mostrar "Ayer"
-          return 'Ayer';
+            // Entre 24 y 48 horas, mostrar "Ayer"
+            return 'Ayer';
         } else {
-          // Más de 48 horas, mostrar el nombre del día
-          const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-          const nombreDia = diasSemana[fecha.getDay()];
-          return nombreDia;
+            // Más de 48 horas, mostrar el nombre del día
+            const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const nombreDia = diasSemana[fecha.getDay()];
+            return nombreDia;
         }
-      };
+    };
 
     const MostrarTodos = () => {
         alert("Filtrar Mostrar Todos")
@@ -72,6 +85,26 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                 }));
                 console.log(data)
                 setData(formattedData);
+                const newMessages = formattedData.filter((item) => !data.some((existingItem) => existingItem.id === item.id));
+                const uniqueNewMessages = newMessages.filter((item) => !data.some((existingItem) => existingItem.id === item.id));
+    
+
+                if (uniqueNewMessages.b1 = "1") {
+                    
+                }
+                if (uniqueNewMessages.length > 0) {
+                    console.log("-------------")
+                    let b1Value = uniqueNewMessages[0].b1;
+                    console.log('Valor de b1:', b1Value);
+                    console.log("-------------")
+
+                    if (b1Value === "1") {
+                        newMessageSoundRef.current.play();
+                    }
+                  
+                }
+    
+                setData((prevData) => [...prevData, ...uniqueNewMessages]);
             } catch (error) {
                 console.error('Error al obtener datos de la API:', error);
             }
@@ -81,13 +114,15 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
         return () => clearInterval(intervalId);
 
-        fetchData();
+        // fetchData()
 
-    }, []);
+    }, [data]);
+
+
 
     return (
         <>
-            <div style={divStyle} className="w-full lg:w-[700px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div style={divStyle} className="w-full lg:w-[680px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
                         <img src="logo.png" alt="" />
@@ -107,7 +142,10 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                             type="search"
                             className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                             id="exampleSearch2"
-                            placeholder="Type query" />
+                            placeholder="Type query"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                        />
                         <label
                             htmlFor="exampleSearch2"
                             className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.2rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
@@ -129,7 +167,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
 
                 <div onClick={handleDivClick} className='w-full h-[65%] md:h-[75%] overflow-auto custom-scrollbar2 lg:-z-10 mt-3 bg-white rounded-xl'>
-                    {data.map((item, index) => (
+                    {filteredData.map((item, index) => (
                         <div
                             key={index}
                             className='flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 rounded-t'
@@ -146,7 +184,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                                 <span className='absolute top-1 tex-xs font-semibold h-6 overflow-hidden text-gray-800'>
                                     {item.name ? item.name : 'Usuario'}
                                 </span>
-                                <span className='text-[#5f6368] w-[60%] overflow-hidden text-[13.5px]'>
+                                <span className='text-[#5f6368] w-[60%] break-all overflow-hidden text-[13.5px]'>
                                     {item.men}
                                 </span>
                             </div>
