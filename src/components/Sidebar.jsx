@@ -47,9 +47,9 @@ const Sidebar = () => {
     <>
 
       <div className={`${isDown3 ? 'lg:mr-[240px]' : 'lg:mr-[50px]'} duration-700 ease-in-out`}>
-      <div className={`absolute right-0 top-0 md:-top-2 lg:hidden pr-3 ${isOpen ? 'z-50' : 'z-10'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
+      <div className={`absolute right-0 top-0 md:-top-2 lg:hidden ${isOpen ? 'z-50' : 'z-10'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
 
-        <div className={`h-screen ml-[50px] right-0  z-10 ${isDown4 ? 'bg-transparent' : 'bg-[#0000009b]'} fixed duration-2000 lg:bg-transparent`}>
+        <div className={`h-screen ml-[50px] right-0 md:w-0  ${isDown4 ? 'w-0' : 'w-full'}  z-10 ${isDown4 ? 'bg-transparent' : 'bg-[#0000009b]'} fixed duration-2000 lg:bg-transparent`}>
           <div
             className={`bg-[#f1f2f3] h-screen w-[250px] ${isOpen ? 'translate-x-[0]' : 'translate-x-[-100%]'
               } flex justify-start overflow-hidden flex-col duration-700 ease-in-out fixed top-0 left-0 z-10 lg:translate-x-0 pt-3  ${isOpen ? 'lg:w-[62px]' : 'w-[250px]'
@@ -72,7 +72,7 @@ const Sidebar = () => {
                 >
                   <i className="text-xl fa-solid fa-house bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
                   <li className='flex w-[150px] justify-between'>
-                    <p>
+                    <p className='text-lg'>
                       Chat</p>   <i
                         className={`fa-solid  ${isDown ? 'fa-chevron-down' : 'fa-chevron-right'}`}
                       ></i>
@@ -94,7 +94,7 @@ const Sidebar = () => {
                 >
                   <i className="text-xl fa-solid fa-gear bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
                   <li className='flex w-[150px] justify-between'>
-                    <p>
+                    <p className='text-lg'>
                       Opciones</p> <i
                         className={`fa-solid  ${isDown2 ? 'fa-chevron-down' : 'fa-chevron-right'}`}
                       ></i>
@@ -113,28 +113,28 @@ const Sidebar = () => {
                 <a href="/">
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li>Perfil</li>
+                  <li className='text-lg'>Perfil</li>
                 </div>
                 </a>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li>Contacto</li>
+                  <li className='text-lg'>Contacto</li>
                 </div>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li>Perfil</li>
+                  <li className='text-lg'>Perfil</li>
                 </div>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li>Contacto</li>
+                  <li className='text-lg'>Contacto</li>
                 </div>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li>Perfil</li>
+                  <li className='text-lg'>Perfil</li>
                 </div>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li>Contacto</li>
+                  <li className='text-lg'>Contacto</li>
                 </div>
               </ul>
             </div>

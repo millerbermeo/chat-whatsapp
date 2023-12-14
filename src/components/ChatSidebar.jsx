@@ -7,12 +7,14 @@ import ModalAgenda from './ModalAgenda';
 const ChatSidebar = ({ onClicEnDiv }) => {
 
     const isSmallScreen = useMediaQuery({ minWidth: 769 });
-    const newMessageSoundRef = useRef(new Audio('../../../public/sonido.mp3'));
+    const newMessageSoundRef = useRef(new Audio('sonido1.mp3'));
+    const [elementoSeleccionado, setElementoSeleccionado] = useState(null);
 
 
     const [data, setData] = useState([]);
     const [divStyle, setDivStyle] = useState({});
     const [searchTerm, setSearchTerm] = useState('');
+    
 
     const handleDivClick = () => {
         // Actualiza el estilo del div al hacer clic
@@ -122,10 +124,10 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     return (
         <>
-            <div style={divStyle} className="w-full lg:w-[680px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200 border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
+            <div style={divStyle} className="w-full lg:w-[680px] h-screen lg:h-[95vh] lg:z-10 bg-gray-200  border-r flex flex-col items-center border-gray-300 shadow-lg p-3">
                 <div className='flex justify-start 2xl:justify-center gap-[20px] items-center w-full'>
                     <div className='w-[45px]'>
-                        <img src="logo.png" alt="" />
+                        <img className='bg-transparent' src="logologo.png" alt="" />
                     </div>
                     <div className='w-[50%]'>
                         <ModalAgenda />
@@ -170,10 +172,12 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                     {filteredData.map((item, index) => (
                         <div
                             key={index}
-                            className='flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 rounded-t'
+                            className={`flex gap-2 w-full py-2 border-b border-gray-300 relative justify-center items-center hover:bg-gray-300 cursor-pointer p-2 ${elementoSeleccionado === item.numberw ? 'bg-gray-300' : ''}`}
                             onClick={() => {
                                 handleClick(item.numberw);
                                 onClicEnDiv(item.numberw);
+                                setElementoSeleccionado(item.numberw); // Corregir aquí
+
                             }}
                         >
                             <div className='w-[50px]'>

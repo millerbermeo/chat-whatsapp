@@ -12,6 +12,14 @@ function ChatMenssage({ numeroSeleccionado }) {
   const tipoArchivoRef = useRef(null);
   const lastMessageRef = useRef(null);
   const [shouldScrollToLast, setShouldScrollToLast] = useState(true);
+  const [tipoArchivo, setTipoArchivo] = useState("");
+  const [mensajeTipo, setMensajeTipo] = useState("text");
+
+
+  const handleMessageTypeChange = (tipo) => {
+  setMensajeTipo(tipo);
+};
+
 
   const formatFecha = (fechaCompleta) => {
     const fecha = new Date(fechaCompleta);
@@ -58,39 +66,54 @@ function ChatMenssage({ numeroSeleccionado }) {
       fileType = "image";
     } else if (selectedFile.type.startsWith("video/")) {
       fileType = "video";
+    } else if (selectedFile.type.startsWith("text/")) {
+      fileType = "text"; // Agregamos esta condición para archivos de texto
     } else {
       // Puedes agregar más condiciones según los tipos de archivo que necesites manejar
       fileType = "document";
     }
 
-    // Almacena el tipo de archivo en una variable de estado o ref
-    // Puedes usar setTipoArchivo(fileType) si lo almacenas en un estado
+    // Almacena el tipo de archivo y el nombre del archivo en el estado
+    setTipoArchivo({
+      type: fileType,
+      name: selectedFile.name,
+    });
+
+    // Actualiza el valor del input con el nombre del archivo
+    mensajeInputRef.current.value = selectedFile.name;
 
     // Realiza la lógica que necesites con el archivo seleccionado
     console.log('Archivo seleccionado:', selectedFile);
-
-    // Puedes almacenar el tipo de archivo en el estado o ref
-    // setTipoArchivo(fileType);
   };
+  
 
   const enviarMensaje = async () => {
     try {
-
       setMostrarDiv(false);
 
-      const mensaje = mensajeInputRef.current.value.trim();
-      if (mensaje.length === 0 || (mensaje.length === 2 && emojiSelected)) {
-        // Si el mensaje está vacío o solo contiene emojis, no enviar nada
-        return;
+      let mensaje = mensajeInputRef.current.value.trim();
+      let documento = '';
+
+      // If the message type is document and a file is selected
+      if (mensajeTipo === 'document') {
+        const selectedFile = mensajeInputRef.current.files[0];
+        if (selectedFile) {
+          // Use the name of the selected file as the message for documents
+          mensaje = selectedFile.name;
+          documento = selectedFile;
+        }
       }
 
-      const type_file = tipoArchivoRef.current || "";
-
+      // Usar el tipo de mensaje almacenado en el estado
       const formData2 = new FormData();
       formData2.append('numberw', numeroSeleccionado);
-      formData2.append('message', mensajeInputRef.current.value);
-      formData2.append('type_m', type_file);
+      formData2.append('message', mensaje);
+      formData2.append('type_m', mensajeTipo); // Utilizar mensajeTipo en lugar de tipoArchivo
+      formData2.append('document_w', documento);
       mensajeInputRef.current.value = '';
+
+      // Limpiar el nombre del archivo en el estado después de enviar el mensaje
+      setTipoArchivo("");
 
       // Espera a que la operación asíncrona se complete
       await axios.post(
@@ -98,12 +121,15 @@ function ChatMenssage({ numeroSeleccionado }) {
         formData2
       );
 
-
       setShouldScrollToLast(true);
     } catch (error) {
       console.error('Error al enviar el mensaje:', error);
     }
   };
+  
+  
+  
+  
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -174,7 +200,7 @@ function ChatMenssage({ numeroSeleccionado }) {
             onClick={() => setFullscreenImage(mensaje.url)}
           />
           <div className="absolute bottom-2 right-2">
-            <a href={mensaje.url} download>
+            <a target='_blank' href={mensaje.url} download>
               <button className="bg-[#005187] hover:bg-[#005187]/80 text-white font-bold px-2 py-1 rounded">
                 Descargar
               </button>
@@ -234,8 +260,11 @@ function ChatMenssage({ numeroSeleccionado }) {
 
   return (
     <>
-      <div className='w-full h-[87vh] md:h-[95vh] shadow-lg relative flex flex-col bg-gray-100'>
-        <div className="w-full mt-5 pb-[15px] h-[100%] overflow-y-scroll custom-scrollbar3 px-4 md:px-12 bg-gray-100" ref={(ref) => setScrollRef(ref)}>
+      <div className='w-full md:w-[95%] h-[87vh] md:h-[95vh] shadow-lg relative z-auto flex flex-col bg-gray-200'>
+        <div className='absolute w-full h-14'>
+
+        </div>
+        <div className="w-full mt-5 lg:mt-14 pb-[15px] h-[100%] overflow-y-scroll custom-scrollbar3 px-4 md:px-12 bg-gray-100" ref={(ref) => setScrollRef(ref)}>
           <div className='absolute bottom-16 left-[40px] flex items-center flex-col z-50'>
 
             {mostrarDiv ?
@@ -250,7 +279,7 @@ function ChatMenssage({ numeroSeleccionado }) {
               >
                 {mensaje.b1 === '2' ? (
                   <>
-                    <div className="text-black break-all text-[15px] bg-[#84b6f4] flex-wrap flex max-w-[65%] rounded-lg p-[7px] pl-10 text-left">
+                    <div className="text-black break-all text-[15px] shadow bg-[#84b6f4] flex-wrap flex max-w-[65%] rounded-lg p-[7px] pl-10 text-left">
                       {renderMedia(mensaje)}
                     </div>
                     <i className="fa-solid border border-[#84b6f4] fa-user-tie text-2xl w-10 h-10 grid place-items-center text-[#84b6f4] bg-gray-200 rounded-full"></i>
@@ -258,7 +287,7 @@ function ChatMenssage({ numeroSeleccionado }) {
                 ) : (
                   <>
                     <i className="fa-solid  border border-gray-300 fa-user text-2xl w-10 h-10 grid place-items-center text-gray-400 bg-gray-200 rounded-full"></i>
-                    <div className="text-black text-[15px] break-all bg-gray-300 flex-wrap flex max-w-[65%]  rounded-lg p-[7px] pr-10">{renderMedia(mensaje)}</div>
+                    <div className="text-black text-[15px] break-all shadow bg-gray-300 flex-wrap flex max-w-[65%]  rounded-lg p-[7px] pr-10">{renderMedia(mensaje)}</div>
                   </>
                 )}
               </li>
@@ -307,15 +336,15 @@ function ChatMenssage({ numeroSeleccionado }) {
                 </button>
               </div>
               <input
-                ref={mensajeInputRef}
-                onKeyDown={handleKeyDown}
-                className="w-full border-2 border-gray-300 bg-white h-10 px-8 pl-14 pr-16 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-                type="text"
-                placeholder="Escribe algo..."
-              />
+        ref={mensajeInputRef}
+        onKeyDown={handleKeyDown}
+        className="w-full border-2 border-gray-300 bg-white h-10 px-8 pl-14 pr-16 rounded-lg text-sm focus:outline-none focus:border-blue-500"
+        type="text"
+        placeholder="Escribe algo..."
+      />
             </div>
             <button type='submit' onClick={enviarMensaje}>
-              <div className='w-[40px] h-[40px] bg-green-500 rounded-[25px] text-white flex justify-center items-center text-2xl'>
+              <div className='w-[35px] h-[35px] bg-green-500 rounded-[25px] text-white flex justify-center items-center text-2xl'>
                 <i className="fa-solid fa-chevron-right"></i>
               </div>
             </button>
