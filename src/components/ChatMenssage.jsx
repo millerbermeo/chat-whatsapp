@@ -3,7 +3,7 @@ import axios from 'axios';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faDownload, faFile, faUserTie, faCloudArrowUp, faIcons, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faDownload, faFile, faRightFromBracket, faUserTie, faCloudArrowUp, faIcons, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 function ChatMenssage({ numeroSeleccionado }) {
   const [mensajes, setMensajes] = useState([]);
@@ -298,8 +298,19 @@ function ChatMenssage({ numeroSeleccionado }) {
 
   return (
     <>
-      <div className='w-full md:w-[95%] h-[87vh] md:h-[95vh] shadow-lg relative z-auto flex flex-col bg-gray-200'>
+      <div className='w-full md:w-[95%] h-[87vh] md:h-[95vh] shadow-lg relative z-auto flex flex-col bg-gray-100 lg:bg-gray-200'>
         {/* ... (resto del código) */}
+        <div className='absolute top-0 w-full hidden lg:flex h-12 justify-between items-center px-5'>
+          <div>
+            <div className='flex gap-2 items-end'>
+              <img className='w-[30px]' src="user.webp" alt="" />
+              <span>Distribuidora Negociemos</span>
+            </div>
+          </div>
+          <div className='text-2xl'>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+          </div>
+        </div>
         <div className="w-full mt-5 lg:mt-14 pb-[15px] h-[100%] overflow-y-scroll custom-scrollbar3 px-4 md:px-12 bg-gray-100" ref={(ref) => setScrollRef(ref)}>
           <div className='absolute bottom-16 left-[40px] flex items-center flex-col z-50'>
             {mostrarDiv ?
@@ -343,12 +354,12 @@ function ChatMenssage({ numeroSeleccionado }) {
             )}
           </ul>
           {loading && (
-            <div className="text-red-600 absolute bottom-20 right-72">Cargando...</div>
+            <div className="text-red-600 absolute bottom-14 lg:bottom-20 right-20 lg:right-72">Cargando...</div>
           )}
         </div>
         <div className='w-full flex items-center justify-center h-14 bg-gray-200 bottom-0'>
           <div className="w-[90%] mx-auto p-2 gap-2 flex">
-            <button onClick={handleReloadPage} className='md:hidden' type='submit'>
+            <button onClick={handleReloadPage} className='flex md:hidden' type='submit'>
               <div className='w-[40px] h-[40px] bg-[#000] rounded-[25px] text-white flex justify-center items-center text-2xl'>
                 <FontAwesomeIcon icon={faChevronLeft} />
               </div>

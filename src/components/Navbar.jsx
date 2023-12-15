@@ -1,5 +1,7 @@
 import React from 'react'
-import Dropdown from "./Dropdown"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+
 
 function Navbar() {
   return (
@@ -31,7 +33,9 @@ function Navbar() {
 
         {/* User Icon */}
         <div className='pr-14 lg:pr-0'>
-      <Dropdown/>
+        <div className='text-2xl'>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+          </div>
       </div>
 
       </nav>
