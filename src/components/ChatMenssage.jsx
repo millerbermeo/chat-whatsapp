@@ -12,14 +12,7 @@ function ChatMenssage({ numeroSeleccionado }) {
   const tipoArchivoRef = useRef(null);
   const lastMessageRef = useRef(null);
   const [shouldScrollToLast, setShouldScrollToLast] = useState(true);
-  const [tipoArchivo, setTipoArchivo] = useState("");
-  const [mensajeTipo, setMensajeTipo] = useState("text");
-
-
-  const handleMessageTypeChange = (tipo) => {
-  setMensajeTipo(tipo);
-};
-
+  
 
   const formatFecha = (fechaCompleta) => {
     const fecha = new Date(fechaCompleta);
@@ -52,82 +45,64 @@ function ChatMenssage({ numeroSeleccionado }) {
   };
 
   const mensajeInputRef = useRef(null);
+  const archivoInputRef = useRef(null);
 
-  const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (!selectedFile) {
-      // No se seleccionó ningún archivo
+
+
+const enviarMensaje = async () => {
+  try {
+    setMostrarDiv(false);
+
+    const mensaje = mensajeInputRef.current.value.trim();
+    if (mensaje.length === 0 || (mensaje.length === 1 && emojiSelected)) {
+      // Si el mensaje está vacío o solo contiene emojis, no enviar nada
       return;
     }
 
-    // Determinar el tipo de archivo
-    let fileType = "";
-    if (selectedFile.type.startsWith("image/")) {
-      fileType = "image";
-    } else if (selectedFile.type.startsWith("video/")) {
-      fileType = "video";
-    } else if (selectedFile.type.startsWith("text/")) {
-      fileType = "text"; // Agregamos esta condición para archivos de texto
-    } else {
-      // Puedes agregar más condiciones según los tipos de archivo que necesites manejar
-      fileType = "document";
+    // Accede al valor del input de archivo utilizando la referencia correcta
+    const selectedFile = archivoInputRef.current.files[0];
+
+    // Accede al tipo de archivo usando la referencia correcta
+    const type_file = selectedFile ? 'document' : 'text';
+
+    const formData2 = new FormData();
+    formData2.append('numberw', numeroSeleccionado);
+    formData2.append('message', mensaje);
+    formData2.append('type_m', type_file);
+
+    // Agrega el archivo al FormData solo si se selecciona uno
+    if (selectedFile) {
+      formData2.append('document_w', selectedFile);
     }
 
-    // Almacena el tipo de archivo y el nombre del archivo en el estado
-    setTipoArchivo({
-      type: fileType,
-      name: selectedFile.name,
-    });
+    mensajeInputRef.current.value = '';
+    archivoInputRef.current.value = '';
 
-    // Actualiza el valor del input con el nombre del archivo
-    mensajeInputRef.current.value = selectedFile.name;
+    // Enviar el mensaje en segundo plano
+    enviarMensajeEnSegundoPlano(formData2);
 
-    // Realiza la lógica que necesites con el archivo seleccionado
-    console.log('Archivo seleccionado:', selectedFile);
-  };
-  
+    // Limpiar y permitir enviar más mensajes
+    setShouldScrollToLast(true);
+  } catch (error) {
+    console.error('Error al enviar el mensaje:', error);
+  }
+};
 
-  const enviarMensaje = async () => {
-    try {
-      setMostrarDiv(false);
+// Función para enviar mensajes en segundo plano
+const enviarMensajeEnSegundoPlano = async (formData) => {
+  try {
+    // Realizar la operación asíncrona
+    await axios.post(
+      'http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/api_send_message.php',
+      formData
+    );
 
-      let mensaje = mensajeInputRef.current.value.trim();
-      let documento = '';
+    // Puedes realizar otras acciones después de enviar el mensaje en segundo plano
+  } catch (error) {
+    console.error('Error al enviar el mensaje en segundo plano:', error);
+  }
+};
 
-      // If the message type is document and a file is selected
-      if (mensajeTipo === 'document') {
-        const selectedFile = mensajeInputRef.current.files[0];
-        if (selectedFile) {
-          // Use the name of the selected file as the message for documents
-          mensaje = selectedFile.name;
-          documento = selectedFile;
-        }
-      }
-
-      // Usar el tipo de mensaje almacenado en el estado
-      const formData2 = new FormData();
-      formData2.append('numberw', numeroSeleccionado);
-      formData2.append('message', mensaje);
-      formData2.append('type_m', mensajeTipo); // Utilizar mensajeTipo en lugar de tipoArchivo
-      formData2.append('document_w', documento);
-      mensajeInputRef.current.value = '';
-
-      // Limpiar el nombre del archivo en el estado después de enviar el mensaje
-      setTipoArchivo("");
-
-      // Espera a que la operación asíncrona se complete
-      await axios.post(
-        'http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/api_send_message.php',
-        formData2
-      );
-
-      setShouldScrollToLast(true);
-    } catch (error) {
-      console.error('Error al enviar el mensaje:', error);
-    }
-  };
-  
-  
   
   
 
@@ -315,19 +290,15 @@ function ChatMenssage({ numeroSeleccionado }) {
               <div className='ml-10 absolute -left-8 top-2'>
 
                 <input
+                  ref={archivoInputRef} // Asigna la referencia del input de archivo
                   id="fileInput"
                   type="file"
                   accept=".pdf, .jpg, .jpeg, .png, .gif, .mp4, .webm, .ogg"
-                  onChange={handleFileChange}
-                  ref={mensajeInputRef}
                   className="hidden" // Ocultar el input real
                 />
                 <label htmlFor="fileInput" className="file-input-label">
                   <i className="fa-solid fa-cloud-arrow-up"></i>
                 </label>
-
-
-
 
               </div>
               <div className='ml-10 absolute -left-2 top-2'>
@@ -336,12 +307,12 @@ function ChatMenssage({ numeroSeleccionado }) {
                 </button>
               </div>
               <input
-        ref={mensajeInputRef}
-        onKeyDown={handleKeyDown}
-        className="w-full border-2 border-gray-300 bg-white h-10 px-8 pl-14 pr-16 rounded-lg text-sm focus:outline-none focus:border-blue-500"
-        type="text"
-        placeholder="Escribe algo..."
-      />
+                ref={mensajeInputRef} // Asigna la referencia del input de texto
+                onKeyDown={handleKeyDown}
+                className="w-full border-2 border-gray-300 bg-white h-10 px-8 pl-14 pr-16 rounded-lg text-sm focus:outline-none focus:border-blue-500"
+                type="text"
+                placeholder="Escribe algo..."
+              />
             </div>
             <button type='submit' onClick={enviarMensaje}>
               <div className='w-[35px] h-[35px] bg-green-500 rounded-[25px] text-white flex justify-center items-center text-2xl'>

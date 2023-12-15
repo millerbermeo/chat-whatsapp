@@ -40,7 +40,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
 
     const handleClick = (numberw) => {
         // Aquí puedes hacer lo que necesites con el número seleccionado
-        console.log('Número seleccionado:', numberw);
+        // console.log('Número seleccionado:', numberw);
         // Puedes guardar el número en el estado si es necesario
         setNumeroSeleccionado(numberw);
         // También puedes pasarlo a otro componente aquí o realizar otras acciones
@@ -85,7 +85,7 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                     ...item,
                     fecha: formatFecha(item.fecha),
                 }));
-                console.log(data)
+                // console.log(data)
                 setData(formattedData);
                 const newMessages = formattedData.filter((item) => !data.some((existingItem) => existingItem.id === item.id));
                 const uniqueNewMessages = newMessages.filter((item) => !data.some((existingItem) => existingItem.id === item.id));
@@ -95,10 +95,10 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                     
                 }
                 if (uniqueNewMessages.length > 0) {
-                    console.log("-------------")
+                    // console.log("-------------")
                     let b1Value = uniqueNewMessages[0].b1;
-                    console.log('Valor de b1:', b1Value);
-                    console.log("-------------")
+                    // console.log('Valor de b1:', b1Value);
+                    // console.log("-------------")
 
                     if (b1Value === "1") {
                         newMessageSoundRef.current.play();
