@@ -12,7 +12,9 @@ function ChatMenssage({ numeroSeleccionado }) {
   const tipoArchivoRef = useRef(null);
   const lastMessageRef = useRef(null);
   const [shouldScrollToLast, setShouldScrollToLast] = useState(true);
-  
+  const [loading, setLoading] = useState(false);
+
+
 
   const formatFecha = (fechaCompleta) => {
     const fecha = new Date(fechaCompleta);
@@ -49,62 +51,100 @@ function ChatMenssage({ numeroSeleccionado }) {
 
 
 
-const enviarMensaje = async () => {
-  try {
-    setMostrarDiv(false);
+  const enviarMensaje = async () => {
+    try {
+      setLoading(true);
+      setMostrarDiv(false);
 
-    const mensaje = mensajeInputRef.current.value.trim();
-    if (mensaje.length === 0 || (mensaje.length === 1 && emojiSelected)) {
-      // Si el mensaje está vacío o solo contiene emojis, no enviar nada
-      return;
+      // Accede al valor del input de archivo utilizando la referencia correcta
+      const selectedFile = archivoInputRef.current.files[0];
+
+      // Accede al tipo de archivo usando la referencia correcta
+      const type_file = selectedFile ? 'document' : 'text';
+
+      const formData2 = new FormData();
+      formData2.append('numberw', numeroSeleccionado);
+
+      // Incluso si el mensaje está vacío, agrégalo al FormData
+      const trimmedMessage = mensajeInputRef.current.value.trim();
+      if (trimmedMessage || selectedFile) {
+        formData2.append('message', trimmedMessage);
+      } else {
+        // Both message and file input are empty, do not send the message
+        setLoading(false);
+        return;
+      }
+
+      formData2.append('type_m', type_file);
+
+      // Agrega el archivo al FormData solo si se selecciona uno
+      if (selectedFile && type_file === 'document') {
+        formData2.append('document_w', selectedFile);
+
+        // Update loading state while uploading the document
+        setLoading(true);
+      } else {
+        // If it's not a document, reset the loading state
+        setLoading(false);
+      }
+
+      mensajeInputRef.current.value = '';
+      archivoInputRef.current.value = '';
+      // Enviar el mensaje y cargar el archivo en paralelo
+      await Promise.all([
+        enviarMensajeEnSegundoPlano(formData2),
+        cargarArchivo(selectedFile),
+      ]);
+
+      // Limpiar y permitir enviar más mensajes
+      setShouldScrollToLast(true);
+    } catch (error) {
+      console.error('Error al enviar el mensaje:', error);
+    } finally {
+      // Clear loading state after the upload is complete or in case of an error
+      setLoading(false);
+
+      // Restablecer valores
+      // También puedes restablecer el estado de otros elementos si es necesario
+      setEmojiSelected(false);
     }
+  };
 
-    // Accede al valor del input de archivo utilizando la referencia correcta
-    const selectedFile = archivoInputRef.current.files[0];
 
-    // Accede al tipo de archivo usando la referencia correcta
-    const type_file = selectedFile ? 'document' : 'text';
 
-    const formData2 = new FormData();
-    formData2.append('numberw', numeroSeleccionado);
-    formData2.append('message', mensaje);
-    formData2.append('type_m', type_file);
 
-    // Agrega el archivo al FormData solo si se selecciona uno
-    if (selectedFile) {
-      formData2.append('document_w', selectedFile);
+
+
+  // Función para cargar el archivo
+  const cargarArchivo = async (file) => {
+    try {
+      if (file) {
+        // Puedes realizar operaciones adicionales relacionadas con la carga del archivo aquí
+        console.log('Cargando archivo:', file.name);
+      }
+    } catch (error) {
+      console.error('Error al cargar el archivo:', error);
     }
+  };
 
-    mensajeInputRef.current.value = '';
-    archivoInputRef.current.value = '';
 
-    // Enviar el mensaje en segundo plano
-    enviarMensajeEnSegundoPlano(formData2);
+  // Función para enviar mensajes en segundo plano
+  const enviarMensajeEnSegundoPlano = async (formData) => {
+    try {
+      // Realizar la operación asíncrona
+      await axios.post(
+        'http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/api_send_message.php',
+        formData
+      );
 
-    // Limpiar y permitir enviar más mensajes
-    setShouldScrollToLast(true);
-  } catch (error) {
-    console.error('Error al enviar el mensaje:', error);
-  }
-};
+      // Puedes realizar otras acciones después de enviar el mensaje en segundo plano
+    } catch (error) {
+      console.error('Error al enviar el mensaje en segundo plano:', error);
+    }
+  };
 
-// Función para enviar mensajes en segundo plano
-const enviarMensajeEnSegundoPlano = async (formData) => {
-  try {
-    // Realizar la operación asíncrona
-    await axios.post(
-      'http://181.143.234.138:5001/chat_business2/Dashboard/Dashboard/api_send_message.php',
-      formData
-    );
 
-    // Puedes realizar otras acciones después de enviar el mensaje en segundo plano
-  } catch (error) {
-    console.error('Error al enviar el mensaje en segundo plano:', error);
-  }
-};
 
-  
-  
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -171,13 +211,14 @@ const enviarMensajeEnSegundoPlano = async (formData) => {
           <img
             src={mensaje.url}
             alt="Imagen"
-            className="max-w-[200px] h-auto object-contain cursor-pointer"
+            className="max-w-[200px] relative  h-auto object-contain cursor-pointer"
             onClick={() => setFullscreenImage(mensaje.url)}
+            style={mensaje.b1 === '1' ? { right: '-16px' } : { left: '-16px' }}
           />
-          <div className="absolute bottom-2 right-2">
+          <div className="absolute bottom-2" style={mensaje.b1 === '1' ? { right: '-10px' } : { left: '-10px' }}>
             <a target='_blank' href={mensaje.url} download>
               <button className="bg-[#005187] hover:bg-[#005187]/80 text-white font-bold px-2 py-1 rounded">
-                Descargar
+              <i class="fa-solid fa-download"></i>
               </button>
             </a>
           </div>
@@ -186,36 +227,49 @@ const enviarMensajeEnSegundoPlano = async (formData) => {
     } else if (mensaje.tipo_media === 'document') {
       return (
         <a target='_blank' href={mensaje.url} download>
-          <button className="bg-[#005187] hover:bg-[#005187]/80 text-white font-bold px-4 py-2 rounded">
-            {mensaje.men}
+          <button className="w-[120px] relative h-[40px] text-black px-4 py-2 rounded">
+            <span className='break-all overflow-y-hidden flex flex-wrap h-5 overflow-ellipsis'>
+              {mensaje.men}
+            </span>
+            <span className='absolute top-0' style={mensaje.b1 === '1' ? { right: '-20px' } : { left: '-20px' }}>
+              <i className="fa-solid fa-file text-3xl text-white"></i>
+            </span>
           </button>
         </a>
+
       );
     } else if (mensaje.tipo_media === 'video') {
       return (
-        <video controls className="w-[200px] h-auto object-contain cursor-pointer">
-          <source src={mensaje.url} type="video/mp4" />
-          <source src={mensaje.url} type="video/webm" />
-          <source src={mensaje.url} type="video/ogg" />
-          Your browser does not support the video tag.
-        </video>
+        <div className='relative'>
+          <video controls className="w-[200px] h-auto relative object-contain cursor-pointer" style={mensaje.b1 === '1' ? { right: '-16px' } : { left: '-16px' }}>
+            <source src={mensaje.url} type="video/mp4" />
+            <source src={mensaje.url} type="video/webm" />
+            <source src={mensaje.url} type="video/ogg" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       );
     } else if (mensaje.tipo_media === 'voice') {
       return (
-        <audio controls className="cursor-pointer w-[200px]">
-          <source src={mensaje.url} type="audio/mp3" />
-          Your browser does not support the audio tag.
-        </audio>
+        <div className='relative'>
+          <audio controls className="cursor-pointer relative w-[200px]" style={mensaje.b1 === '1' ? { right: '-16px' } : { left: '-16px' }}>
+            <source src={mensaje.url} type="audio/mp3" />
+            Your browser does not support the audio tag.
+          </audio>
+        </div>
       );
     } else if (mensaje.tipo_media === 'sticker') {
       // Handle sticker rendering (ajusta el código según tu implementación de stickers)
       return (
-        <img
-          src={mensaje.url}
-          alt="Sticker"
-          className="max-w-[100px] h-auto object-contain cursor-pointer"
-          onClick={() => setFullscreenImage(mensaje.url)}
-        />
+        <div className='relative'>
+          <img
+            src={mensaje.url}
+            alt="Sticker"
+            className="max-w-[100px] relative h-auto object-contain cursor-pointer"
+            onClick={() => setFullscreenImage(mensaje.url)}
+            style={mensaje.b1 === '1' ? { right: '-16px' } : { left: '-16px' }}
+          />
+        </div>
       );
     } else {
 
@@ -254,6 +308,7 @@ const enviarMensajeEnSegundoPlano = async (formData) => {
               >
                 {mensaje.b1 === '2' ? (
                   <>
+
                     <div className="text-black break-all text-[15px] shadow bg-[#84b6f4] flex-wrap flex max-w-[65%] rounded-lg p-[7px] pl-10 text-left">
                       {renderMedia(mensaje)}
                     </div>
@@ -277,7 +332,13 @@ const enviarMensajeEnSegundoPlano = async (formData) => {
               </div>
             )}
           </ul>
+          {loading && (
+            <div className="text-red-600 absolute bottom-20 right-72">Cargando...</div>
+          )}
+
         </div>
+
+
 
         <div className='w-full flex items-center justify-center h-14 bg-gray-200 bottom-0'>
           <div className="w-[90%] mx-auto p-2 gap-2 flex">
