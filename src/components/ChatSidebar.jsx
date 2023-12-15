@@ -3,6 +3,10 @@ import { useMediaQuery } from 'react-responsive';
 import React, { useEffect, useState, useRef } from 'react';
 import ModalChat from './ModalChat';
 import ModalAgenda from './ModalAgenda';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear, faBell, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const ChatSidebar = ({ onClicEnDiv }) => {
 
@@ -194,14 +198,14 @@ const ChatSidebar = ({ onClicEnDiv }) => {
                             </div>
 
                             <div className='flex translate-y-[-14px] h-2 gap-1'>
-                                <div className="bg-gray-800 hover:bg-black text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                    <i className="fa-solid fa-gear text-xs"></i>
+                                <div className="bg-gray-800 text-xs hover:bg-black text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
+                                <FontAwesomeIcon icon={faGear} />
                                 </div>
-                                <div className="bg-green-500 hover:bg-green-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                    <i className="fa-solid fa-bell text-xs"></i>
+                                <div className="bg-green-500 text-xs hover:bg-green-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
+                                <FontAwesomeIcon icon={faBell} />
                                 </div>
-                                <div className="bg-blue-500 hover:bg-blue-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
-                                    <i className="fa-solid fa-paper-plane text-xs"></i>
+                                <div className="bg-blue-500 text-xs hover:bg-blue-600 text-white font-bold w-5 h-5 flex justify-center items-center rounded-full">
+                                <FontAwesomeIcon icon={faPaperPlane} />
                                 </div>
                             </div>
                             <span className='absolute right-2 bottom-0 text-[12px]'>

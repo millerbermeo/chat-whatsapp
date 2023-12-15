@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 function ModalChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +56,7 @@ function ModalChat() {
           className="w-full text-white gap-2 bg-[#84b6f4] hover:bg-[#84b6f4]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm py-2.5 2xl:py-3 text-center flex justify-center items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40"
         >
           Nuevo Chat
-          <i className="fa-solid fa-book"></i>
+          <FontAwesomeIcon icon={faBook} />
         </button>
       </div>
 

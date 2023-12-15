@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faChevronDown, faChevronRight, faHouse, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faChevronDown, faChevronRight, faHouse, faGear, faCommentDots, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 
 
 const Sidebar = () => {
@@ -83,7 +83,7 @@ const Sidebar = () => {
                     />
                   </div>
 
-           
+
                   <li className='flex w-[150px] justify-between'>
                     <p className='text-lg'>
                       Chat
@@ -105,10 +105,10 @@ const Sidebar = () => {
                   className="flex justify-start items-center gap-5 cursor-pointer hover:text-black"
                   onClick={toggleChatMenu2}
                 ><div className="text-xl fa-solid bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center">
-                  <FontAwesomeIcon icon={faGear} />
-                </div>
+                    <FontAwesomeIcon icon={faGear} />
+                  </div>
 
-          
+
                   <li className='flex w-[150px] justify-between'>
                     <p className='text-lg'>
                       Opciones
@@ -126,32 +126,25 @@ const Sidebar = () => {
                     <li className='flex items-center gap-2'><i className="fas fa-circle text-[6px]"></i> Opción 3</li>
                   </ul>
                 </div>
-                <a href="/">
-                  <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                    <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                    <li className='text-lg'>Perfil</li>
+
+                <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
+
+                  <div className="text-xl  bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center">
+                  <FontAwesomeIcon icon={faAddressCard} />
+
                   </div>
-                </a>
-                <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                  <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li className='text-lg'>Contacto</li>
-                </div>
-                <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                  <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
                   <li className='text-lg'>Perfil</li>
                 </div>
+
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                  <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
+
+                  <div className="text-xl  bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center">
+                    <FontAwesomeIcon icon={faCommentDots} />
+
+                  </div>
                   <li className='text-lg'>Contacto</li>
                 </div>
-                <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                  <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li className='text-lg'>Perfil</li>
-                </div>
-                <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                  <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li className='text-lg'>Contacto</li>
-                </div>
+
               </ul>
             </div>
 

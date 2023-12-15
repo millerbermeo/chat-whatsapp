@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Transition } from '@headlessui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentMedical } from '@fortawesome/free-solid-svg-icons';
+
 
 function ModalAgenda() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +57,7 @@ function ModalAgenda() {
           className="w-full text-white gap-5 bg-[#005187] hover:bg-[#005187]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm py-2.5 2xl:py-3 text-center flex justify-center items-center dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40"
         >
           Agenda
-          <i className="fa-solid fa-comment-medical"></i>
+          <FontAwesomeIcon icon={faCommentMedical} />
         </button>
       </div>
 
