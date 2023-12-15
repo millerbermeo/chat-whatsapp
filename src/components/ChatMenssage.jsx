@@ -303,7 +303,7 @@ function ChatMenssage({ numeroSeleccionado }) {
         <div className='absolute top-0 w-full hidden lg:flex h-12 justify-between items-center px-5'>
           <div>
             <div className='flex gap-2 items-end'>
-              <img className='w-[30px]' src="user.webp" alt="" />
+              <img className='w-[30px] rounded-full' src="negociemos.jpg" alt="" />
               <span>Distribuidora Negociemos</span>
             </div>
           </div>
