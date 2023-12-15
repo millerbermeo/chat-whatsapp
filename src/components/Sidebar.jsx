@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faChevronDown, faChevronRight, faHouse, faGear } from '@fortawesome/free-solid-svg-icons';
+
 
 const Sidebar = () => {
 
@@ -16,11 +19,11 @@ const Sidebar = () => {
 
   const toggleSidebar = () => {
 
-      setIsChatOpen(false);
-      setIsChatOpen2(false);
-      setIsDown(false);
-      setIsDown2(false);
-    
+    setIsChatOpen(false);
+    setIsChatOpen2(false);
+    setIsDown(false);
+    setIsDown2(false);
+
     setIsOpen(!isOpen);
     setIsDown3(!isDown3)
     setIsDown4(!isDown4)
@@ -29,16 +32,16 @@ const Sidebar = () => {
   };
 
   const toggleChatMenu = () => {
-      setIsChatOpen(!isChatOpen);
-      setIsDown(!isDown);
-    
+    setIsChatOpen(!isChatOpen);
+    setIsDown(!isDown);
+
   };
 
   const toggleChatMenu2 = () => {
 
-      setIsChatOpen2(!isChatOpen2);
-      setIsDown2(!isDown2);
-    
+    setIsChatOpen2(!isChatOpen2);
+    setIsDown2(!isDown2);
+
   };
 
   // f1f3f4
@@ -47,7 +50,8 @@ const Sidebar = () => {
     <>
 
       <div className={`${isDown3 ? 'lg:mr-[240px]' : 'lg:mr-[50px]'} duration-700 ease-in-out`}>
-      <div className={`absolute right-0 top-0 md:-top-2 lg:hidden ${isOpen ? 'z-50' : 'z-10'}`} onClick={toggleSidebar}> <i className="fa-solid fa-bars text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded"></i></div>
+        <div className={`absolute right-0 top-0 md:-top-2 lg:hidden ${isOpen ? 'z-50' : 'z-10'}`} onClick={toggleSidebar}> <div className='text-black bg-white text-3xl mt-[22.5px] -translate-x-4 bg-red px-2 rounded'>   <FontAwesomeIcon icon={faBars} className="text-black" />
+        </div></div>
 
         <div className={`h-screen ml-[50px] right-0 md:w-0  ${isDown4 ? 'w-0' : 'w-full'}  z-10 ${isDown4 ? 'bg-transparent' : 'bg-[#0000009b]'} fixed duration-2000 lg:bg-transparent`}>
           <div
@@ -58,7 +62,10 @@ const Sidebar = () => {
             <div className="p-3 flex justify-start gap-5 w-[250px] pb-10">
               <div className="w-[35px] h-[35px] bg-[#000] p-1 flex rounded-full justify-center items-center cursor-pointer" onClick={toggleSidebar}>
                 {/* <img src="logo.png" alt="" onClick={toggleSidebar}/> */}
-                <i className="fa-solid fa-bars text-white text-xl"></i>
+
+                <FontAwesomeIcon icon={faBars} className="text-white" />
+
+
               </div>
               <img className='w-40' src="negociemoss.png" alt="" />
             </div>
@@ -70,12 +77,18 @@ const Sidebar = () => {
                   className="flex justify-start items-center gap-5 cursor-pointer hover:text-black"
                   onClick={toggleChatMenu}
                 >
-                  <i className="text-xl fa-solid fa-house bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
+                  <div className='text-xl bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center'>
+                    <FontAwesomeIcon
+                      icon={faHouse}
+                    />
+                  </div>
+
+           
                   <li className='flex w-[150px] justify-between'>
                     <p className='text-lg'>
-                      Chat</p>   <i
-                        className={`fa-solid  ${isDown ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                      ></i>
+                      Chat
+                    </p>
+                    <FontAwesomeIcon icon={isDown ? faChevronDown : faChevronRight} className='' />
                   </li>
                 </div>
                 <div
@@ -91,13 +104,16 @@ const Sidebar = () => {
                 <div
                   className="flex justify-start items-center gap-5 cursor-pointer hover:text-black"
                   onClick={toggleChatMenu2}
-                >
-                  <i className="text-xl fa-solid fa-gear bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
+                ><div className="text-xl fa-solid bg-black text-white rounded-full w-[35px] h-[35px] flex justify-center items-center">
+                  <FontAwesomeIcon icon={faGear} />
+                </div>
+
+          
                   <li className='flex w-[150px] justify-between'>
                     <p className='text-lg'>
-                      Opciones</p> <i
-                        className={`fa-solid  ${isDown2 ? 'fa-chevron-down' : 'fa-chevron-right'}`}
-                      ></i>
+                      Opciones
+                    </p>
+                    <FontAwesomeIcon icon={isDown2 ? faChevronDown : faChevronRight} className='' />
                   </li>
                 </div>
                 <div
@@ -111,10 +127,10 @@ const Sidebar = () => {
                   </ul>
                 </div>
                 <a href="/">
-                <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
-                  <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
-                  <li className='text-lg'>Perfil</li>
-                </div>
+                  <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
+                    <i className="text-xl fa-brands fa-rocketchat bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
+                    <li className='text-lg'>Perfil</li>
+                  </div>
                 </a>
                 <div className="flex justify-start items-center gap-5 cursor-pointer hover:text-black">
                   <i className="text-xl fa-solid fa-address-card bg-white rounded-full w-[35px] h-[35px] flex justify-center items-center"></i>
