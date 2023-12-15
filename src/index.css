@@ -77,5 +77,8 @@ input[type="file"] {
   display: inline-block;
 }
 
+.file-input-label.file-uploaded {
+  color: red; /* o el color que desees cuando se carga un documento */
+}
 
 
